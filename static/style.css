@@ -1,0 +1,27 @@
+#input {
+    text-align: center;
+}
+#image-container {
+    display: flex; 
+    justify-content: center; /* Centers both images horizontally */
+    align-items: flex-start; /* Aligns images to the top */
+    gap: 30px; /* Adds space between the images */
+    margin-top: 20px;
+    flex-wrap: nowrap; /* Prevents images from stacking */
+    width: 100%;
+}
+
+#image-container div {
+    text-align: center;
+    flex: 1; /* Makes both divs take equal space */
+    width: 45%; /* Ensures they don’t exceed half of the screen */
+}
+
+img {
+    width: 100%;
+    max-width: 400px; /* Adjust the image size */
+    height: auto; /* Keeps aspect ratio */
+    border: 2px solid black;
+    display: block; /* Removes extra spacing */
+    margin: 0 auto; /* Centers the image */
+}
