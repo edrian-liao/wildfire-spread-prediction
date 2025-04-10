@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wildfire Prediction MVP</title>
     <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <div id="input">
@@ -12,9 +13,14 @@
 
     <form id="uploadForm">
         <input type="file" id="fileInput" accept="image/*">
+        <label for="latInput">Latitude:</label>
+        <input type="text" id="latInput" placeholder="Enter Latitude">
+        <label for="lonInput">Longitude:</label>
+        <input type="text" id="lonInput" placeholder="Enter Longitude">
         <button type="submit">Predict Fire Spread</button>
     </form>
     </div>
+    <div id="loadingSpinner" style="display: none;">Loading...</div>
 
     <div id="image-container">
         <div>
@@ -24,9 +30,12 @@
         <div>
             <h2>Predicted Wildfire Spread</h2>
             <img id="outputImage" src="" alt="Prediction will appear here" style="display: none;">
+            <a id="downloadButton" href="#" download style="display: none;">Download Prediction</a>
         </div>
     </div>
-
+    
+    <div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="static/script.js"></script>
 </body>
 </html>

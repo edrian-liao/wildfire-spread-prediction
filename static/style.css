@@ -25,3 +25,23 @@ img {
     display: block; /* Removes extra spacing */
     margin: 0 auto; /* Centers the image */
 }
+
+/* Map container styling */
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+}
+
+/* Slider styling */
+input[type="range"] {
+    margin: 10px 0;
+}
+
+/* Override for Leaflet marker images to remove black border */
+img.leaflet-marker-icon,
+img.leaflet-marker-shadow {
+    border: none !important;
+    box-shadow: none !important;
+}

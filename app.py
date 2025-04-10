@@ -12,9 +12,16 @@ def home():
 # Handle predictions (hardwired for now)
 @app.route('/predict', methods=['POST'])
 def predict():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
+    # Retrieve the file (if provided) and the coordinate inputs
+    file = request.files.get('file')
+    lat = request.form.get('latitude')
+    lon = request.form.get('longitude')
 
+    # If neither a file nor both coordinates are provided, return an error
+    if not file and (not lat or not lon):
+        return jsonify({"error": "Please provide an image file or coordinates."}), 400
+
+    # For now, return a dummy prediction output
     return jsonify({"output_image": "/static/predicted_wildfire.png"})
 
 # Serve static files correctly
