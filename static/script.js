@@ -5,8 +5,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var marker;
 var rectangle;
 
-const FIXED_WIDTH_KM = 133.5;
-const FIXED_HEIGHT_KM = 115.5;
+const FIXED_WIDTH_KM = 25;
+const FIXED_HEIGHT_KM = 25;
 
 function updateRectangle() {
     // Only proceed if a marker exists
@@ -42,27 +42,15 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
         spinner.style.display = "block";
     }
 
-    let file = document.getElementById("fileInput").files[0];
     let lat = document.getElementById("latInput").value;
     let lon = document.getElementById("lonInput").value;
 
-    if (!file && (!lat || !lon)) {
-        alert("Please upload an image or provide coordinates.");
+    if (!lat || !lon) {
+        alert("Please provide valid coordinates.");
         return;
     }
 
-    if (file) {
-        // Show the uploaded image
-        let inputImage = document.getElementById("inputImage");
-        inputImage.src = URL.createObjectURL(file);
-        inputImage.style.display = "block";
-    }
-
     let formData = new FormData();
-    if (file) {
-        formData.append("file", file);
-    }
-
     formData.append("latitude", lat);
     formData.append("longitude", lon);
 
@@ -89,15 +77,36 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
         spinner.style.display = "none";
     }
 
-    // Show the predicted output image
-    let outputImage = document.getElementById("outputImage");
-    outputImage.src = result.output_image;
-    outputImage.style.display = "block";
+    // Show both current and predicted fire images with labels
+    let imageContainer = document.getElementById("image-container");
+    if (imageContainer) {
+        imageContainer.style.display = "flex";
+    }
 
-    let downloadButton = document.getElementById("downloadButton");
-    if (downloadButton) {
-        downloadButton.href = result.output_image;
-        downloadButton.style.display = "block";
+    let currentImage = document.getElementById("currentImage");
+    let predictedImage = document.getElementById("outputImage");
+    currentImage.src = "/static/input_active_fire.png"; // updated image path
+    predictedImage.src = result.output_image;
+    currentImage.style.display = "block";
+    predictedImage.style.display = "block";
+
+    // Update description and channel text (demo placeholders)
+    let changeDescription = document.getElementById("changeDescription");
+    let influentialChannel = document.getElementById("influentialChannel");
+
+    changeDescription.innerText = "Based on the predicted model output, the number of pixels identified as containing active fire is expected to increase by approximately 23% in the selected geographic region. This indicates a notable expansion of the fire boundary by the next day. The pattern of growth appears to follow areas with dense vegetation and accumulated fuel.";
+    influentialChannel.innerHTML = "The model identified three key variables that played a central role in the predicted fire expansion:<ul style='margin-top: 10px; padding-left: 20px; text-align: left;'><li><strong>NDVI (Normalized Difference Vegetation Index)</strong> – This measure of vegetation health and density is critical in determining available fuel. Areas with higher NDVI tend to support more intense and faster-spreading fires.</li><li><strong>Wind Speed</strong> – Wind significantly impacts how quickly a fire can spread by carrying embers and intensifying flame propagation, especially in open terrain.</li><li><strong>Elevation</strong> – Elevation influences both temperature and moisture levels in vegetation. Higher elevations often retain more moisture, while lower valleys can act as fire corridors under certain conditions.</li></ul>";
+
+    changeDescription.style.display = "block";
+    influentialChannel.style.display = "block";
+    let fuelChannels = document.getElementById("fuelChannels");
+    if (fuelChannels) {
+        fuelChannels.style.display = "block";
+    }
+    
+    let inputLayers = document.getElementById("inputLayers");
+    if (inputLayers) {
+        inputLayers.style.display = "block";
     }
 });
 

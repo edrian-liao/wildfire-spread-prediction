@@ -6,35 +6,145 @@
     <title>Wildfire Prediction MVP</title>
     <link rel="stylesheet" href="static/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        #input h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        #uploadForm {
+            background-color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+
+        #uploadForm label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+
+        #uploadForm input {
+            padding: 5px 10px;
+            margin-right: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #uploadForm button {
+            background-color: #2e86de;
+            color: white;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #uploadForm button:hover {
+            background-color: #1e6bb8;
+        }
+
+        #image-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 40px auto;
+            max-width: 1200px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+        h3 {
+            color: #34495e;
+        }
+
+        #map {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        #inputLayers img {
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
     <div id="input">
-        <h1>Wildfire Spread Prediction (MVP)</h1>
+        <h1>Wildfire Spread Prediction</h1>
 
     <form id="uploadForm">
-        <input type="file" id="fileInput" accept="image/*">
         <label for="latInput">Latitude:</label>
         <input type="text" id="latInput" placeholder="Enter Latitude">
-        <label for="lonInput">Longitude:</label>
+        <label for="lonIrenput">Longitude:</label>
         <input type="text" id="lonInput" placeholder="Enter Longitude">
         <button type="submit">Predict Fire Spread</button>
     </form>
     </div>
     <div id="loadingSpinner" style="display: none;">Loading...</div>
 
-    <div id="image-container">
+    <div id="image-container" style="display: none; justify-content: center; align-items: flex-start; gap: 40px; margin-top: 30px; flex-wrap: wrap; padding: 10px 30px; text-align: center;">
         <div>
-            <h2>Uploaded Image</h2>
-            <img id="inputImage" src="" alt="Uploaded Image" style="display: none;">
+            <h2>Current Day</h2>
+            <img id="currentImage" src="" alt="Current wildfire image" style="display: none;">
         </div>
         <div>
-            <h2>Predicted Wildfire Spread</h2>
+            <h2>Next Day Prediction</h2>
             <img id="outputImage" src="" alt="Prediction will appear here" style="display: none;">
             <a id="downloadButton" href="#" download style="display: none;">Download Prediction</a>
         </div>
+        <div style="max-width: 300px; font-family: sans-serif; font-size: 1em; line-height: 1.5; color: #333;">
+            <h2 style="font-size: 1.3em; margin-bottom: 10px;">Insights</h2>
+            <div id="changeDescription" style="display: none; margin-bottom: 10px;">
+                Based on the predicted model output, the number of pixels identified as containing active fire is expected to increase by approximately 23% in the selected geographic region. This indicates a notable expansion of the fire boundary by the next day. The pattern of growth appears to follow areas with dense vegetation and accumulated fuel.
+            </div>
+            <div id="influentialChannel" style="display: none;">
+                🔍 The model identified three key variables that played a central role in the predicted fire expansion:
+                <ul style="margin-top: 10px; padding-left: 20px; text-align: left;">
+                    <li><strong>NDVI (Normalized Difference Vegetation Index)</strong> – This measure of vegetation health and density is critical in determining available fuel. Areas with higher NDVI tend to support more intense and faster-spreading fires.</li>
+                    <li><strong>Wind Speed</strong> – Wind significantly impacts how quickly a fire can spread by carrying embers and intensifying flame propagation, especially in open terrain.</li>
+                    <li><strong>Elevation</strong> – Elevation influences both temperature and moisture levels in vegetation. Higher elevations often retain more moisture, while lower valleys can act as fire corridors under certain conditions.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    
+
     <div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+
+    <div id="inputLayers" style="display: none; text-align: center; margin-top: 40px;">
+        <h2>All Input Channel Feature Maps</h2>
+        <div style="margin-bottom: 20px;">
+            <h3>Topography</h3>
+            <img src="/static/input_topo.png" alt="Topographic Inputs" style="width: 100%; max-width: 1000px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <h3>Fuel</h3>
+            <img src="/static/input_fuel.png" alt="Fuel Inputs" style="width: 100%; max-width: 1000px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <h3>Current Weather</h3>
+            <img src="/static/input_weather.png" alt="Weather Inputs" style="width: 100%; max-width: 1000px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <h3>Weather Forecast</h3>
+            <img src="/static/input_weather_forecast.png" alt="Forecast Inputs" style="width: 100%; max-width: 1000px;">
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="static/script.js"></script>
 </body>

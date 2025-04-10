@@ -12,17 +12,19 @@ def home():
 # Handle predictions (hardwired for now)
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Retrieve the file (if provided) and the coordinate inputs
-    file = request.files.get('file')
+    # Retrieve the coordinate inputs
     lat = request.form.get('latitude')
     lon = request.form.get('longitude')
 
-    # If neither a file nor both coordinates are provided, return an error
-    if not file and (not lat or not lon):
-        return jsonify({"error": "Please provide an image file or coordinates."}), 400
+    # If neither both coordinates are provided, return an error
+    if not lat or not lon:
+        return jsonify({"error": "Please provide valid latitude and longitude coordinates."}), 400
 
     # For now, return a dummy prediction output
-    return jsonify({"output_image": "/static/predicted_wildfire.png"})
+    return jsonify({
+        "output_image": "/static/predicted_wildfire.png",
+        "show_prediction": True
+    })
 
 # Serve static files correctly
 @app.route('/static/<path:filename>')
