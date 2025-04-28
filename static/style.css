@@ -97,15 +97,59 @@ body {
     margin-bottom: 10px;
 }
 
+#image-container {
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    padding: 10px 30px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+#image-container div {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+#image-container img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    display: block;
+    margin: 0 auto;
+}
+
+#image-container .insight-section {
+    max-width: 300px; 
+    font-family: sans-serif; 
+    font-size: 1em; 
+    line-height: 1.5; 
+    color: #333;
+}
+
+#image-container .insight-section h2 {
+    font-size: 1.3em; 
+    margin-bottom: 10px;
+}
+
 #image-container #changeDescription {
     display: none; 
     margin-bottom: 10px;
-    content: "🔥 Based on the predicted model output, the number of pixels identified as containing active fire is expected to increase by approximately 23% in the selected geographic region. This indicates a notable expansion of the fire boundary by the next day. The pattern of growth appears to follow areas with dense vegetation and accumulated fuel, particularly in regions with south-facing slopes and low humidity conditions.";
 }
 
 #image-container #influentialChannel {
     display: none; 
-    content: "🔍 The model identified three key environmental variables that played a central role in the predicted fire expansion:<ul style='margin-top: 10px; padding-left: 20px; text-align: left;'><li><strong>NDVI (Normalized Difference Vegetation Index)</strong> – This measure of vegetation health and density is critical in determining available fuel. Areas with higher NDVI tend to support more intense and faster-spreading fires.</li><li><strong>Wind Speed</strong> – Wind significantly impacts how quickly a fire can spread by carrying embers and intensifying flame propagation, especially in open terrain.</li><li><strong>Elevation</strong> – Elevation influences both temperature and moisture levels in vegetation. Higher elevations often retain more moisture, while lower valleys can act as fire corridors under certain conditions.</li></ul>";
 }
 
 #inputLayers {

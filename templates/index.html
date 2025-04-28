@@ -55,12 +55,49 @@
         }
 
         #image-container {
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            padding: 10px 30px;
+            text-align: center;
             background-color: #fff;
             border-radius: 10px;
             padding: 20px;
             margin: 40px auto;
             max-width: 1200px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #image-container div {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        #image-container img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            display: block;
+            margin: 0 auto;
+        }
+
+        #image-container .insight-section {
+            max-width: 300px; 
+            font-family: sans-serif; 
+            font-size: 1em; 
+            line-height: 1.5; 
+            color: #333;
+        }
+
+        #image-container .insight-section h2 {
+            font-size: 1.3em; 
+            margin-bottom: 10px;
         }
 
         h2 {
@@ -77,10 +114,6 @@
             margin-top: 30px;
         }
 
-        #inputLayers img {
-            border-radius: 6px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
     </style>
 </head>
 <body>
@@ -97,7 +130,7 @@
     </div>
     <div id="loadingSpinner" style="display: none;">Loading...</div>
 
-    <div id="image-container" style="display: none; justify-content: center; align-items: flex-start; gap: 40px; margin-top: 30px; flex-wrap: wrap; padding: 10px 30px; text-align: center;">
+    <div id="image-container">
         <div>
             <h2>Current Day</h2>
             <img id="currentImage" src="" alt="Current wildfire image" style="display: none;">
@@ -107,8 +140,8 @@
             <img id="outputImage" src="" alt="Prediction will appear here" style="display: none;">
             <a id="downloadButton" href="#" download style="display: none;">Download Prediction</a>
         </div>
-        <div style="max-width: 300px; font-family: sans-serif; font-size: 1em; line-height: 1.5; color: #333;">
-            <h2 style="font-size: 1.3em; margin-bottom: 10px;">Insights</h2>
+        <div class="insight-section">
+            <h2>Insights</h2>
             <div id="changeDescription" style="display: none; margin-bottom: 10px;">
                 Based on the predicted model output, the number of pixels identified as containing active fire is expected to increase by approximately 23% in the selected geographic region. This indicates a notable expansion of the fire boundary by the next day. The pattern of growth appears to follow areas with dense vegetation and accumulated fuel.
             </div>

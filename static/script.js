@@ -90,11 +90,53 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
     currentImage.style.display = "block";
     predictedImage.style.display = "block";
 
-    // Update description and channel text (demo placeholders)
-    let changeDescription = document.getElementById("changeDescription");
+    // Compute the change in burned pixels
+    const loadImageAsGrayscaleArray = async (src) => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                const data = imageData.data;
+                const grayArray = [];
+                for (let i = 0; i < data.length; i += 4) {
+                    const grayscale = data[i]; // Assuming grayscale input
+                    grayArray.push(grayscale);
+                }
+                resolve({ data: grayArray, width: img.width, height: img.height });
+            };
+            img.src = src;
+        });
+    };
+
+    const countBurnedPixels = (grayData) => {
+        return grayData.reduce((count, val) => count + (val > 0 ? 1 : 0), 0);
+    };
+
+    const currentData = await loadImageAsGrayscaleArray(currentImage.src);
+    const predictedData = await loadImageAsGrayscaleArray(predictedImage.src);
+    const currentBurned = countBurnedPixels(currentData.data);
+    const predictedBurned = countBurnedPixels(predictedData.data);
+    const growth = predictedBurned - currentBurned;
+    const growthPercent = ((growth / currentBurned) * 100).toFixed(1);
+
+    // Update description based on growth
+    if (growth > 0) {
+        changeDescription.innerText = `🔥 Based on the predicted output, active fire pixels are expected to increase by approximately ${growthPercent}%. This suggests a significant spread in the selected area, likely influenced by surrounding environmental conditions.`;
+    } else if (growth < 0) {
+        changeDescription.innerText = `🟢 The model predicts a reduction of approximately ${Math.abs(growthPercent)}% in active fire pixels. This may indicate improving conditions or containment within the selected region.`;
+    } else {
+        changeDescription.innerText = `⚠️ No change in active fire extent is predicted for the selected region. This could mean a pause in fire behavior or stable environmental conditions.`;
+    }
+
+    // Keep the rest of the insights
     let influentialChannel = document.getElementById("influentialChannel");
 
-    changeDescription.innerText = "Based on the predicted model output, the number of pixels identified as containing active fire is expected to increase by approximately 23% in the selected geographic region. This indicates a notable expansion of the fire boundary by the next day. The pattern of growth appears to follow areas with dense vegetation and accumulated fuel.";
     influentialChannel.innerHTML = "The model identified three key variables that played a central role in the predicted fire expansion:<ul style='margin-top: 10px; padding-left: 20px; text-align: left;'><li><strong>NDVI (Normalized Difference Vegetation Index)</strong> – This measure of vegetation health and density is critical in determining available fuel. Areas with higher NDVI tend to support more intense and faster-spreading fires.</li><li><strong>Wind Speed</strong> – Wind significantly impacts how quickly a fire can spread by carrying embers and intensifying flame propagation, especially in open terrain.</li><li><strong>Elevation</strong> – Elevation influences both temperature and moisture levels in vegetation. Higher elevations often retain more moisture, while lower valleys can act as fire corridors under certain conditions.</li></ul>";
 
     changeDescription.style.display = "block";
