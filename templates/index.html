@@ -118,7 +118,10 @@
 </head>
 <body>
     <div id="input">
-        <h1>Wildfire Spread Prediction</h1>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px;">
+            <img src="{{ url_for('static', filename='wildfireAIlogo.png') }}" alt="WildfireAI Logo" style="width: 80px;">
+            <h1 style="font-size: 2.2em; color: #2c3e50; margin: 0;">Wildfire Spread Prediction</h1>
+        </div>
 
     <form id="uploadForm">
         <label for="latInput">Latitude:</label>
@@ -127,6 +130,10 @@
         <input type="text" id="lonInput" placeholder="Enter Longitude">
         <button type="submit">Predict Fire Spread</button>
     </form>
+    <!-- Styled progress bar container -->
+    <div id="progressContainer">
+        <div id="progressBar"></div>
+    </div>
     </div>
     <div id="loadingSpinner" style="display: none;">Loading...</div>
 

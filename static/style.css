@@ -193,3 +193,22 @@ h3 {
     border-radius: 8px;
     margin-top: 30px;
 }
+
+/* Refined progress bar styling */
+#progressContainer {
+    display: none;
+    width: 400px;
+    height: 12px;
+    background-color: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 20px auto;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background-color: #2e86de;
+    transition: width 0.1s linear;
+}

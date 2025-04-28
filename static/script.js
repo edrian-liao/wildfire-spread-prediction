@@ -1,12 +1,12 @@
-var map = L.map('map').setView([34.0522, -118.2437], 10);
+var map = L.map('map').setView([39.82, -98.57], 4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 var marker;
 var rectangle;
 
-const FIXED_WIDTH_KM = 25;
-const FIXED_HEIGHT_KM = 25;
+const FIXED_WIDTH_KM = 100;
+const FIXED_HEIGHT_KM = 100;
 
 function updateRectangle() {
     // Only proceed if a marker exists
@@ -34,10 +34,47 @@ function updateRectangle() {
     }
 }
 
+function animateProgressBar() {
+    return new Promise((resolve) => {
+        const progressBar = document.getElementById("progressBar");
+        if (!progressBar) {
+            resolve();
+            return;
+        }
+        progressBar.style.width = "0%";
+        let start = null;
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            let progress = timestamp - start;
+            let percent = Math.min((progress / 10000) * 100, 100);
+            progressBar.style.width = percent + "%";
+            if (percent < 100) {
+                window.requestAnimationFrame(step);
+            } else {
+                resolve();
+            }
+        }
+        window.requestAnimationFrame(step);
+    });
+}
+
 document.getElementById("uploadForm").addEventListener("submit", async function(event) {
     event.preventDefault();
-    
+
+    let progressContainer = document.getElementById("progressContainer");
     let spinner = document.getElementById("loadingSpinner");
+    if (progressContainer) {
+        progressContainer.style.display = "block";
+    }
+    if (spinner) {
+        spinner.style.display = "none";
+    }
+
+    await animateProgressBar();
+
+    if (progressContainer) {
+        progressContainer.style.display = "none";
+    }
     if (spinner) {
         spinner.style.display = "block";
     }
