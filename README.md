@@ -30,6 +30,7 @@ This is a local MVP for visualizing wildfire spread predictions. It combines sat
 3. python app.py
 
 
+<pre>
 wildfire-spread-prediction/
 ├── app.py
 ├── templates/
@@ -44,8 +45,14 @@ wildfire-spread-prediction/
 │       ├── waterdrop.png
 │       ├── helicopter.png
 │       └── fema.png
+</pre>
 
-📌 Notes
-	•	Predictions are rotated from a folder of static PNGs (pred_plot_1.png, etc.).
-	•	All predictions include current, true next-day, and model-predicted overlays.
-	•	The app is not yet deployed — it’s designed to run locally for demos or prototyping.
+---
+
+📌 **Notes**
+
+- Predictions are rotated from a folder of static PNGs (pred_plot_1.png, etc.). 
+- All predictions include current, true next-day, and model-predicted overlays.
+- The app is not yet deployed — it’s designed to run locally for demos or prototyping.
+
+---
