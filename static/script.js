@@ -201,3 +201,45 @@ map.on('click', function(e) {
     }
     updateRectangle();
 });
+
+// --- START demo fire prediction markers ---
+const firePredictionBoxes = [
+    {latMin: 35.48473288, latMax: 36.48496686, lonMin: -120.5212072, lonMax: -119.443503},
+    {latMin: 41.67236865, latMax: 42.66284582, lonMin: -117.056161, lonMax: -115.8464582},
+    {latMin: 45.57334754, latMax: 46.57260552, lonMin: -120.4735605, lonMax: -119.3557183},
+    {latMin: 34.1745424,  latMax: 35.15575644, lonMin: -112.9777783, lonMax: -111.7197081},
+    {latMin: 39.72798487, latMax: 40.73387631, lonMin: -122.6513902, lonMax: -121.6247649},
+    {latMin: 33.80150798, latMax: 34.72680466, lonMin: -104.4864763, lonMax: -103.0252156},
+    {latMin: 38.92968503, latMax: 39.89839002, lonMin: -111.8324552, lonMax: -110.4903442},
+    {latMin: 37.88871707, latMax: 38.88875141, lonMin: -119.9865779, lonMax: -118.8815186},
+    {latMin: 47.42273643, latMax: 48.42079188, lonMin: -119.7946409, lonMax: -118.642309},
+    {latMin: 33.22832328, latMax: 34.19028494, lonMin: -109.1736539, lonMax: -107.8328427},
+    {latMin: 44.85680396, latMax: 45.85457922, lonMin: -120.0162605, lonMax: -118.886091},
+    {latMin: 41.36567318, latMax: 42.37689931, lonMin: -124.0417215, lonMax: -123.0379583},
+    {latMin: 38.8202728,  latMax: 39.78195583, lonMin: -110.568149,  lonMax: -109.1908726},
+    {latMin: 40.17603001, latMax: 41.16482589, lonMin: -116.071615,  lonMax: -114.8428407},
+    {latMin: 37.01361848, latMax: 37.96540116, lonMin: -108.600678,  lonMax: -107.1931646},
+    {latMin: 41.3444748,  latMax: 42.35655869, lonMin: -124.1399921, lonMax: -123.1381238},
+    {latMin: 41.10107435, latMax: 42.09519968, lonMin: -117.5856652, lonMax: -116.3958095},
+    {latMin: 41.17231234, latMax: 42.16224507, lonMin: -117.5217044, lonMax: -116.3298349},
+    {latMin: 32.9510916,  latMax: 33.9100054,  lonMin: -108.5401123, lonMax: -107.1874729},
+    {latMin: 33.21675859, latMax: 34.21409917, lonMin: -117.266715,   lonMax: -116.1193803}
+];
+
+firePredictionBoxes.forEach((box) => {
+    const lat = box.latMin + Math.random() * (box.latMax - box.latMin);
+    const lon = box.lonMin + Math.random() * (box.lonMax - box.lonMin);
+
+    // Use a generic fire icon
+    const fireIcon = L.icon({
+        iconUrl: '/static/fire-icon.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -16]
+    });
+
+    L.marker([lat, lon], { icon: fireIcon })
+     .addTo(map)
+    // .bindPopup('🔥 Demo fire location');
+});
+// --- END demo fire prediction markers ---
