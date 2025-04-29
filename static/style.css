@@ -1,214 +1,188 @@
+/* Main container */
 #image-container {
-    display: none;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    padding: 10px 30px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 40px auto;
-    max-width: 1200px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;       /* corrected typo */
+  gap: 40px;
+  margin: 40px auto 30px;     /* merged two margin declarations */
+  flex-wrap: wrap;
+  padding: 20px 30px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  max-width: 1200px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
 }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f7f9fc;
-    color: #333;
-}
-
-#input h1 {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-    color: #2c3e50;
-}
-
-#uploadForm {
-    display: inline-block;
-    margin-top: 10px;
-    background-color: #ffffff;
-    padding: 20px 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-#uploadForm label {
-    margin-right: 10px;
-    font-weight: 500;
-}
-
-#uploadForm input {
-    padding: 5px 10px;
-    margin-right: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#uploadForm button {
-    background-color: #2e86de;
-    color: white;
-    padding: 6px 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#uploadForm button:hover {
-    background-color: #1e6bb8;
-}
-
-#image-container div {
-    flex: 1;
-    min-width: 300px;
-    max-width: 400px;
+#image-container > div {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
 }
 
 #image-container img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    display: block;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: block;
+  margin: 0 auto;
+}
+
+#image-container .insight-section {
+  max-width: 1000px;
+  font-family: sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+  color: #333;
+}
+
+#image-container .insight-section h2 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+/* Hidden by default */
+#image-container #changeDescription,
+#image-container #influentialChannel,
+#inputLayers {
+  display: none;
+}
+
+/* Input & Form */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
 }
 
 #input {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+#input h1 {
+  font-size: 2.2em;
+  margin-bottom: 10px;
+  color: #2c3e50;
 }
 
-#image-container .insight-section {
-    max-width: 300px; 
-    font-family: sans-serif; 
-    font-size: 1em; 
-    line-height: 1.5; 
-    color: #333;
+#uploadForm {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#uploadForm label {
+  margin-right: 10px;
+  font-weight: 500;
+}
+#uploadForm input {
+  padding: 5px 10px;
+  margin-right: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#uploadForm button {
+  background-color: #2e86de;
+  color: #fff;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#uploadForm button:hover {
+  background-color: #1e6bb8;
 }
 
-#image-container .insight-section h2 {
-    font-size: 1.3em; 
-    margin-bottom: 10px;
-}
-
-#image-container {
-    display: none;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    padding: 10px 30px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 40px auto;
-    max-width: 1200px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-#image-container div {
-    flex: 1;
-    min-width: 300px;
-    max-width: 400px;
-}
-
-#image-container img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    display: block;
-    margin: 0 auto;
-}
-
-#image-container .insight-section {
-    max-width: 300px; 
-    font-family: sans-serif; 
-    font-size: 1em; 
-    line-height: 1.5; 
-    color: #333;
-}
-
-#image-container .insight-section h2 {
-    font-size: 1.3em; 
-    margin-bottom: 10px;
-}
-
-#image-container #changeDescription {
-    display: none; 
-    margin-bottom: 10px;
-}
-
-#image-container #influentialChannel {
-    display: none; 
-}
-
-#inputLayers {
-    display: none; 
-    text-align: center; 
-    margin-top: 40px;
-}
-
-#inputLayers h2 {
-    margin-bottom: 20px;
-}
-
+/* Input layers section */
+#inputLayers h2,
 #inputLayers h3 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-
 #inputLayers img {
-    border-radius: 6px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-#image-container #changeDescription {
-    display: none; 
-    margin-bottom: 10px;
-}
-
-#image-container #influentialChannel {
-    display: none; 
-}
-
+/* Headings */
 h2 {
-    color: #2c3e50;
-    font-size: 1.5em;
+  color: #2c3e50;
+  font-size: 1.5em;
 }
 h3 {
-    color: #34495e;
+  color: #34495e;
 }
 
+/* Map styling */
 #map {
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    margin-top: 30px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  margin-top: 30px;
 }
 
-/* Refined progress bar styling */
+/* Progress bar */
 #progressContainer {
-    display: none;
-    width: 400px;
-    height: 12px;
-    background-color: #eee;
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 20px auto;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  display: none;
+  width: 400px;
+  height: 12px;
+  background-color: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 20px auto;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+#progressBar {
+  width: 0;
+  height: 100%;
+  background-color: #2e86de;
+  transition: width 0.1s linear;
 }
 
-#progressBar {
-    width: 0%;
-    height: 100%;
-    background-color: #2e86de;
-    transition: width 0.1s linear;
+/* Output image */
+#outputImage {
+  max-width: 800px;
+  width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Insight layout */
+.insight-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 60px;
+  flex-wrap: nowrap;
+}
+.insight-text {
+  flex: 0 0 65%;
+  min-width: 300px;
+}
+.insight-icons {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+.insight-icons img.resource-icon {
+  width: 250px !important;
+  height: 250px !important;
+  object-fit: contain;
+}
+
+.insight-icons .resource-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
 }
