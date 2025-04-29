@@ -46,7 +46,7 @@ function animateProgressBar() {
         function step(timestamp) {
             if (!start) start = timestamp;
             let progress = timestamp - start;
-            let percent = Math.min((progress / 10000) * 1000, 100);
+            let percent = Math.min((progress / 10000) * 200, 100);
             progressBar.style.width = percent + "%";
             if (percent < 100) {
                 window.requestAnimationFrame(step);
